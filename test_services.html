@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Testes de Serviços</title>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0-beta.5/angular.min.js"></script>
+    <script type="text/javascript" src="test_services.js"></script>
+</head>
+<body>
+    <div ng-app="teste_services">
+        <div ng-controller="ListaController as lc">
+            <h1>Services</h1>
+            <p ng-repeat="message in lc.messages">{{ message.id }}: {{ message.text }}</p>
+        </div>
+
+        <div ng-controller="AddController">
+            <form ng-submit="addMessage(newMessage)">
+                <input type="text" ng-model="newMessage" ng-click="apagar()">
+                <button type="submit">Add Message</button>
+            </form>
+        </div>
+
+        <br/><br/><br/>
+
+        <div id="simple" ng-controller="MyController">
+            <input ng-init="message='test'" ng-model="message" >
+            <button ng-click="callNotify(message)">NOTIFY</button>
+            <p>(you have to click 3 times to see an alert)</p>
+        </div>
+    </div>
+</body>
+</html>
