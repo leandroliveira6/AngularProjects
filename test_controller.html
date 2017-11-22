@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Testes de Angular</title>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0-beta.5/angular.min.js"></script>
+    <script type="text/javascript" src="test_controller.js"></script>
+</head>
+    <div ng-app="app_teste">
+        <div ng-controller="MainCtrl">
+            <h1>{{message}}</h1>
+            <input type="text" ng-model="newMessage">
+            <button type="submit" ng-click="updateMessage(newMessage)">Update Message</button>
+
+            <p>Two times <input ng-model="num"> equals {{ double(num) }}</p>
+
+            <button ng-click="count = count + 1" ng-init="count=0">Incrementa</button>
+            <span>count: {{count}}</span>
+        </div>
+
+        <br/><br/><br/>
+
+        <div ng-controller="SpicyController as sc">
+            <button ng-click="sc.chiliSpicy()">Chili</button>
+            <button ng-click="sc.jalapenoSpicy()">Jalapeño</button>
+            <p>The food is {{sc.spice}} spicy!</p>
+        </div>
+    </div>
+</html>
