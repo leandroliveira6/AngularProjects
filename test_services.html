@@ -15,7 +15,7 @@
 
         <div ng-controller="AddController">
             <form ng-submit="addMessage(newMessage)">
-                <input type="text" ng-model="newMessage" ng-click="apagar()">
+                <input type="text" ng-model="newMessage" ng-click="apagar('newMessage')">
                 <button type="submit">Add Message</button>
             </form>
         </div>
@@ -27,6 +27,43 @@
             <button ng-click="callNotify(message)">NOTIFY</button>
             <p>(you have to click 3 times to see an alert)</p>
         </div>
+
+        <br/><br/><br/>
+
+        <div ng-controller="AdicionaERemoveController">
+            Expression:
+            <input type='text' ng-model="expr" size="80"/>
+            <button ng-click="addExp(expr)">Evaluate</button>
+            <ul>
+                <li ng-repeat="expr in exprs track by $index">
+                     [i={{$index}}]
+                    <code>{{expr}}</code> => <span ng-bind="$eval(expr)"></span>
+                    <a href="" ng-click="removeExp($index)">REMOVER</a>
+                </li>
+            </ul>
+        </div>
+
+        <br/><br/><br/>
+        <!-- FormulariosController herda de AddController -->
+        <div ng-controller="FormulariosController">
+            <form novalidate class="simple-form" name="formulario">
+                <label>Name: <input type="text" ng-model="user.name" ng-model-options="{ updateOn:'mousedown blur' }" /></label><br />
+                <label>E-mail: <input name='myEmail' type="email" ng-init="user.email='exemplo@exemplo.com'" ng-model="user.email" ng-model-options="{ debounce: 1000 }" /></label><br />
+                <span ng-show="formulario.myEmail.$error.email">This email format is invalid!</span><br>
+                Best Editor:
+                <label><input type="radio" ng-model="user.preference" value="vi" />vi</label>
+                <label><input type="radio" ng-model="user.preference" value="emacs" />emacs</label><br />
+                <input type="button" ng-click="reset()" value="Reset" />
+                <input type="submit" ng-click="update(user)" value="Save" />
+            </form>
+            <pre>user = {{user | json}}</pre>
+            <pre>master = {{master | json}}</pre>
+
+            <ul>
+                <li ng-repeat="l in lista track by $index">{{l | json}}</li>
+            </ul>
+        </div>
+        <!-- Fim FormulariosControoller -->
     </div>
 </body>
 </html>

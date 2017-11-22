@@ -56,8 +56,8 @@ app.controller('AddController', function ($scope, Messages){
         $scope.newMessage = "Digite aqui a mensagem";
     };
 
-    $scope.apagar = function(){
-        $scope.newMessage = '';
+    $scope.apagar = function(nome){
+        $scope[nome] = '';
     };
 });
 
@@ -65,5 +65,53 @@ app.controller('MyController', function ($scope,Notify,BatchLog){
     $scope.callNotify = function(msg) {
         Notify(msg);
         BatchLog(msg);
+    };
+});
+
+app.controller('AdicionaERemoveController', function($scope) {
+    var exprs = $scope.exprs = [];
+    $scope.expr = '3*10|currency';
+
+    $scope.addExp = function(expr) {
+        exprs.push(expr);
+    };
+
+    $scope.removeExp = function(index) {
+        exprs.splice(index, 1);
+    };
+});
+
+app.controller('FormulariosController', function($scope) {
+    $scope.master = {};
+    $scope.lista = []
+
+    $scope.update = function(user) {
+        $scope.master = angular.copy(user);
+        $scope.lista.push($scope.master)
+    };
+
+    $scope.reset = function() {
+        $scope.user = angular.copy($scope.master);
+    };
+
+    $scope.reset();
+});
+
+//diretivas
+app.directive('myEmail', function() {
+    var EMAIL_REGEXP = /^[a-z0-9!#$%&'*+/=?^_`{|}~.-]+@example\.com$/i;
+
+    return {
+        require: '?ngModel',
+        link: function(scope, elm, attrs, ctrl) {
+            // only apply the validator if ngModel is present and AngularJS has added the email validator
+            if (ctrl && ctrl.$validators.email) {
+
+                // this will overwrite the default AngularJS email validator
+                ctrl.$validators.email = function(modelValue) {
+                    return ctrl.$isEmpty(modelValue) || EMAIL_REGEXP.test(modelValue);
+                };
+            }
+        }
     };
 });
