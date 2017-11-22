@@ -28,15 +28,15 @@ app.factory('Notify', ['$window', function(win) {
 app.factory('BatchLog', ['$interval', '$log', function($interval, $log) {
     var messageQueue = [];
 
-    function log() {
+    function exibirMensagens() {
         if (messageQueue.length) {
-            $log.log('batchLog messages: ', messageQueue.toString());
+            $log.log('BatchLog messages: ', messageQueue.toString());
             messageQueue = [];
         }
     }
 
     // start periodic checking
-    $interval(log, 5000);
+    $interval(exibirMensagens, 5000);
 
     return function(message) {
         messageQueue.push(message);
