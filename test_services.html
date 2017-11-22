@@ -44,7 +44,7 @@
         </div>
 
         <br/><br/><br/>
-        <!-- FormulariosController herda de AddController -->
+
         <div ng-controller="FormulariosController">
             <form novalidate class="simple-form" name="formulario">
                 <label>Name: <input type="text" ng-model="user.name" ng-model-options="{ updateOn:'mousedown blur' }" /></label><br />
@@ -63,7 +63,6 @@
                 <li ng-repeat="l in lista track by $index">{{l | json}}</li>
             </ul>
         </div>
-        <!-- Fim FormulariosControoller -->
     </div>
 </body>
 </html>
