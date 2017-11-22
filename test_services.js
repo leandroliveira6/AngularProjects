@@ -25,6 +25,24 @@ app.factory('Notify', ['$window', function(win) {
     }
 }]);
 
+app.factory('BatchLog', ['$interval', '$log', function($interval, $log) {
+    var messageQueue = [];
+
+    function log() {
+        if (messageQueue.length) {
+            $log.log('batchLog messages: ', messageQueue.toString());
+            messageQueue = [];
+        }
+    }
+
+    // start periodic checking
+    $interval(log, 5000);
+
+    return function(message) {
+        messageQueue.push(message);
+    }
+}]);
+
 //controllers
 app.controller('ListaController', function(Messages){
     this.messages = Messages.lista;
@@ -43,8 +61,9 @@ app.controller('AddController', function ($scope, Messages){
     };
 });
 
-app.controller('MyController', function ($scope,Notify){
+app.controller('MyController', function ($scope,Notify,BatchLog){
     $scope.callNotify = function(msg) {
         Notify(msg);
+        BatchLog(msg);
     };
 });
